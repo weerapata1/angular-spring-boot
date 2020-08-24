@@ -1,0 +1,15 @@
+package com.example.server.Repository;
+
+import com.example.server.Entity.CarBrand;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.rest.core.annotation.RepositoryRestResource;
+
+import java.util.List;
+
+@RepositoryRestResource
+public interface CarBrandRepository extends JpaRepository <CarBrand , Long>{
+//    List<CarBrand> findByName(String name);
+    CarBrand findByName(String name);
+
+//    CarBrand findByName();
+}
