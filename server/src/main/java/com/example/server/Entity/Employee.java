@@ -7,13 +7,14 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
-import java.util.Optional;
+import java.util.Date;
 
 @Entity
 @Data @Getter @Setter
 @Table(name = "employee")
 @EqualsAndHashCode
 @NoArgsConstructor
+@AllArgsConstructor
 @ToString
 public class Employee {
 
@@ -43,19 +44,22 @@ public class Employee {
     @Pattern(regexp = "\\w{1,30}\\@\\w{1,10}(.\\w{3}|(.\\w{2}){2})")
     private String emailId;
 
-    private String fileName;
-    private String fileType;
-    private byte[] data;
+    private Date birthDate;
 
     @ManyToOne(fetch = FetchType.EAGER ,targetEntity = EmployeeType.class)
     @JoinColumn(name = "empTypeId")
     private EmployeeType employeeType;
 
-    public Employee(String firstName ,String lastName ,String citizenID ,String phoneNum ,String emailId){
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "ImageEmployee_id" ,referencedColumnName = "id",insertable = true)
+    private ImageEmployee imageEmployee;
+
+    public Employee(String firstName, String lastName, String citizenID, String phoneNum, String emailId, EmployeeType EmployeeType){
         this.firstName = firstName;
         this.lastName = lastName;
         this.citizenID = citizenID;
         this.phoneNum = phoneNum;
         this.emailId = emailId;
+        this.employeeType = EmployeeType;
     }
 }
