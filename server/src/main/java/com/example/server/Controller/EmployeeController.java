@@ -3,10 +3,8 @@ package com.example.server.Controller;
 import com.example.server.Entity.*;
 import com.example.server.Repository.*;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.nio.file.FileStore;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import javax.validation.Valid;
@@ -16,16 +14,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-@RestController @CrossOrigin(origins = "http://localhost:4200")
+@RestController
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/api/v1")
 public class EmployeeController {
     @Autowired private EmployeeRepository employeeRepository;
     @Autowired private EmployeeTypeRepository employeeTypeRepository;
     @Autowired private EmployeeService employeeService;
-    public EmployeeController(EmployeeRepository employeeRepository) {
-        this.employeeRepository = employeeRepository;
-    }
 
     @GetMapping("/employees")
     public List<Employee> getAllEmployees() {
@@ -41,7 +39,7 @@ public class EmployeeController {
     public Employee createEmployee(@RequestBody Employee employee){
         return employeeRepository.save(employee);
     }
-
+    
     @PutMapping("/employees/{id}")
     public ResponseEntity<Employee> updateEmployee(@PathVariable(value = "id") Long employeeId,
                                                    @Valid @RequestBody Employee employeeDetails) throws ResourceNotFoundException {
