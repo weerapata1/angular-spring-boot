@@ -8,4 +8,5 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 @RepositoryRestResource
 @CrossOrigin(origins = "*")
 public interface StatusActiveRepository extends JpaRepository<StatusActive,Long> {
+    StatusActive findByStatusName(String statusName);
 }
