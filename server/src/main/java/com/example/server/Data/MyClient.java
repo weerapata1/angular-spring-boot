@@ -19,11 +19,14 @@ public class MyClient implements ApplicationRunner {
     public ApplicationRunner client(ClientTypeRepository clientTypeRepository,
                                    ClientRepository clientRepository){
         return (args -> {
+            /*****-----> ClientType <------*****/
             clientTypeRepository.save(new ClientType("General"));
             clientTypeRepository.save(new ClientType("Exclusive"));
-            clientRepository.save(new Client("Weerapat","Taweesak","1489900265275"));
-            clientRepository.save(new Client("Nanthika","Poonpin","1234567890123"));
 
+            /*****-----> Client <------*****/
+            clientRepository.save(new Client("Weerapat","Taweesak","1489900265275",clientTypeRepository.findByNameType("General")));
+            clientRepository.save(new Client("Angly","Bob","1489900265274",clientTypeRepository.findByNameType("General")));
+            clientRepository.save(new Client("Nanthika","Poonpin","1234567890123",clientTypeRepository.findByNameType("Exclusive")));
         });
     }
 
