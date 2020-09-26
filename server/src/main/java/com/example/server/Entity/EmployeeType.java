@@ -19,8 +19,8 @@ public class EmployeeType {
     @NotNull(message = "\t--> empTypeId is Null <--\t")
     private Long id;
 
-//    @Column(name = "empTypeName",nullable = false , unique = true)
-//    @NotNull(message = "\t--> empTypeName is Null <--\t")
+    @Column(name = "empTypeName",nullable = false , unique = true)
+    @NotNull(message = "\t--> empTypeName is Null <--\t")
     private String nameType;
 
     public EmployeeType(String nameType){
