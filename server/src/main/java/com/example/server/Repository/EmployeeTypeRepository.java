@@ -6,4 +6,5 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 @RepositoryRestResource
 public interface EmployeeTypeRepository extends JpaRepository<EmployeeType , Long> {
+    EmployeeType findByNameType(String nameType);
 }
